@@ -1,0 +1,29 @@
+function checkCashRegister(price, cash, cid) {
+  let countdown = cash - price;
+  console.log(countdown)
+  let currency = [
+    {type: 'PENNY', value: .01},
+    {type: 'NICKEL', value: .05},
+    {type: 'DIME', value: .10},
+    {type: 'QUARTER', value: .25},
+    {type: 'ONE', value: 1},
+    {type: 'FIVE', value: 5},
+    {type: 'TEN', value: 10},
+    {type: 'TWENTY', value: 20},
+    {type: 'ONE HUNDRED', value: 100}
+  ];
+
+  for(let i = currency.length - 1; i >= 0; i--){
+    let cashInDrawer = cid.find(elem => elem[0] === currency[i].type)[1];
+    while(countdown >= currency[i].value && cashInDrawer > 0){
+      countdown -= currency[i].value;
+      cashInDrawer -= currency[i].value;
+      cid[i][1] -= currency[i].value;
+      countdown = Math.round(countdown * 100) / 100;
+      console.log(cid[i][0], parseFloat(cid[i][1].toFixed(2)))
+    }
+  }
+}
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05],
+ ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+  ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
